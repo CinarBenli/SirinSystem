@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ŞirinBank - Hoşgeldiniz</title>
+<link rel="icon" href="/img/favicon.ico" sizes="any"/>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#ffffff;
+font-family:Inter,sans-serif;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+
+body::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+background:radial-gradient(circle at 30% 20%,rgba(59,130,246,0.2),transparent 40%),
+radial-gradient(circle at 70% 80%,rgba(37,99,235,0.2),transparent 40%);
+animation:move 8s linear infinite;
+z-index:0;
+}
+
+@keyframes move{
+0%{transform:translate(0,0);}
+50%{transform:translate(-5%,5%);}
+100%{transform:translate(0,0);}
+}
+
+
+.container-main{
+position:relative;
+z-index:2;
+text-align:center;
+width:100%;
+max-width:900px;
+padding:20px;
+}
+
+
+.title{
+font-size:42px;
+font-weight:800;
+margin-bottom:10px;
+color:#111827;
+}
+
+.slogan{
+color:#6b7280;
+margin-bottom:50px;
+font-size:18px;
+}
+
+
+.cards{
+display:flex;
+gap:30px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.card-btn{
+background:white;
+border-radius:18px;
+padding:50px 60px;
+font-size:22px;
+font-weight:600;
+color:#111;
+text-decoration:none;
+box-shadow:0 15px 35px rgba(0,0,0,0.08);
+transition:.3s;
+position:relative;
+overflow:hidden;
+}
+
+.card-btn::before{
+content:"";
+position:absolute;
+width:120%;
+height:120%;
+background:linear-gradient(120deg,transparent,rgba(59,130,246,0.4),transparent);
+top:-100%;
+left:-100%;
+transition:.5s;
+}
+
+.card-btn:hover::before{
+top:100%;
+left:100%;
+}
+
+.card-btn:hover{
+transform:translateY(-6px) scale(1.03);
+box-shadow:0 25px 45px rgba(59,130,246,0.25);
+}
+
+
+footer{
+position:absolute;
+bottom:20px;
+color:#6b7280;
+font-size:14px;
+}
+
+
+@media(max-width:768px){
+
+.title{
+font-size:32px;
+}
+
+.card-btn{
+width:100%;
+padding:40px;
+}
+
+.cards{
+flex-direction:column;
+gap:20px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container-main">
+
+    <div class="title-logo">
+        <img width="200" height="200" src="/img/favicon.png">
+    </div>
+<br>
+<div class="slogan">
+Dijital Finans Yönetim Platformu
+</div>
+
+<div class="cards">
+
+<a href="/customer/login" class="card-btn">
+Müşteriyim
+</a>
+
+<a href="/admin/login" class="card-btn">
+Yetkiliyim
+</a>
+
+
+</div>
+
+</div>
+
+<footer>
+Developer Talex
+</footer>
+
+</body>
+</html>

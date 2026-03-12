@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/img/favicon.ico" sizes="any"/>
+<title>ŞirinBank - Müşteri Doğrulama</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<style>
+body{
+    background:#f4f6fb;
+    font-family:Inter,sans-serif;
+    margin:0;
+}
+
+.main{
+    margin:2rem;
+}
+
+.topbar{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    background:white;
+    padding:15px 20px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.06);
+    margin-bottom:25px;
+}
+
+.back-link{
+    color:black;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.back-link:hover{
+    color:#3b82f6;
+}
+
+.customer-info{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:10px 20px;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    margin-bottom:20px;
+}
+
+.customer-info span.label{
+    font-weight:600;
+    color:#555;
+}
+
+.customer-info span.value{
+    color:#111;
+}
+
+.image-gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    margin-top:20px;
+}
+
+.image-card{
+    background:white;
+    padding:10px;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    text-align:center;
+}
+
+.image-card img{
+    width:100%;
+    max-height:250px;
+    object-fit:cover;
+    border-radius:8px;
+    margin-bottom:10px;
+}
+
+.image-card span{
+    display:block;
+    font-weight:500;
+    color:#555;
+}
+
+@media (max-width:768px){
+    .customer-info{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="main">
+
+<div class="topbar">
+    <div>
+        <a href="/admin/customer/<%= person.id %>" class="back-link">
+            <i class="bi bi-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+    <div><strong>ŞİRİN BANK</strong></div>
+    <div><strong><%= person.adSoyad %></strong></div>
+</div>
+
+<h3>Müşteri Bilgileri</h3>
+<div class="customer-info">
+
+    <span class="label">Yetkilisi:</span>
+    <span class="value"><%= person.yetkili %></span>
+
+    <span class="label">Ad Soyad:</span>
+    <span class="value"><%= person.adSoyad %></span>
+
+    <span class="label">Email:</span>
+    <span class="value"><%= person.email %></span>
+
+    <span class="label">Telefon:</span>
+    <span class="value"><%= person.telefon %></span>
+
+    <span class="label">TC:</span>
+    <span class="value"><%= person.tc %></span>
+
+    <span class="label">İl:</span>
+    <span class="value"><%= person.il %></span>
+
+    <span class="label">Mahalle:</span>
+    <span class="value"><%= person.mahalle %></span>
+
+    <span class="label">Net Adres:</span>
+    <span class="value"><%= person.netadres %></span>
+</div>
+<div class="form-card">
+<h3>Müşteri Ayarları</h3>
+
+<form method="POST" action="/admin/customers/update/<%= person.id %>">
+
+<div class="image-gallery">
+
+<div class="image-card">
+
+<div class="form-group mb-3">
+<label>Durum</label>
+<select name="AcoountStatus" class="form-control">
+
+<% const durumlar = ["AKTİF","PASİF","BLOKE","İŞLEMDE"] %>
+
+<% durumlar.forEach(d => { %>
+
+<option value="<%= d %>" <%= person.AcoountStatus === d ? "selected" : "" %>>
+<%= d.charAt(0).toUpperCase() + d.slice(1) %>
+</option>
+
+<% }) %>
+
+</select>
+</div>
+
+<div class="form-group mb-3">
+<label>Email</label>
+<input type="email" name="email" class="form-control" value="<%= person.email %>" oninput="this.value = this.value.toUpperCase()">
+</div>
+
+<div class="form-group mb-3">
+<label>Telefon</label>
+<input type="tel" name="telefon" class="form-control" value="<%= person.telefon %>">
+</div>
+
+<div class="form-group mb-3">
+<label>Not</label>
+<input type="text" name="not" class="form-control" value="<%= person.not %>" placeholder="Not Giriniz...">
+</div>
+<button type="submit" class="btn btn-primary w-100">
+<i class="bi bi-save"></i> Kaydet
+</button>
+</form>
+<br><br>
+<form action="/admin/customer/<%= person.id %>/delete" method="POST" onsubmit="return confirm('Müşteriyi silmek istediğinizden emin misiniz?');">
+    <button type="submit" class="w-100 btn btn-danger">
+        <i class="bi bi-trash3-fill"></i> Sil
+    </button>
+</form>
+</div>
+
+</div>
+
+
+</div>
+
+<br>
+<h3>Belgeler & Fotoğraflar</h3>
+<div class="image-gallery">
+
+    <div class="image-card">
+        <img src="/uploads/<%= person.tc %>/<%= person.ikametgahBelgesi %>" alt="İkametgah Belgesi">
+        <span>İkametgah Belgesi</span>
+    </div>
+
+    <div class="image-card">
+        <img src="/uploads/<%= person.tc %>/<%= person.kimlikOnFoto %>" alt="Kimlik Ön">
+        <span>Kimlik Ön</span>
+    </div>
+
+    <div class="image-card">
+        <img src="/uploads/<%= person.tc %>/<%= person.kimlikArkaFoto %>" alt="Kimlik Arka">
+        <span>Kimlik Arka</span>
+    </div>
+
+    <div class="image-card">
+        <img src="/uploads/<%= person.tc %>/<%= person.yuzFoto %>" alt="Yüz Foto">
+        <span>Yüz Foto</span>
+    </div>
+
+</div>
+
+</div>
+<hr style="margin:40px 0">
+
+</body>
+</html>

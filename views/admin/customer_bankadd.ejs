@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/img/favicon.ico" sizes="any"/>
+<title>ŞirinBank - Banka Ekle / Düzenle</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<style>
+body{
+    background:#f4f6fb;
+    font-family:Inter,sans-serif;
+    margin:0;
+}
+
+.main{
+    margin:2rem;
+}
+
+.topbar{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    background:white;
+    padding:15px 20px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.06);
+    margin-bottom:25px;
+}
+
+.back-link{
+    color:black;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.back-link:hover{
+    color:#3b82f6;
+}
+
+form{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);
+}
+
+form .form-group{
+    margin-bottom:15px;
+}
+
+form label{
+    font-weight:600;
+    color:#555;
+}
+
+form input, form select{
+    width:100%;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:14px;
+}
+
+button{
+    padding:10px 20px;
+    font-size:16px;
+}
+
+@media (max-width:768px){
+    .topbar{
+        flex-direction:column;
+        gap:10px;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<div class="main">
+
+<div class="topbar">
+    <div>
+        <a href="/admin/customer/<%= musteriId %>" class="back-link">
+            <i class="bi bi-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+    <div><strong>ŞİRİN BANK</strong></div>
+    <div><strong>Banka Ekleme</strong></div>
+</div>
+
+<form action="/admin/customer/<%= musteriId %>/banka/add" method="POST">
+
+    <input type="hidden" name="musteriId" value="<%= musteriId %>">
+
+  <div class="form-group">
+    <label>Banka İsmi</label>
+    <select name="isim">
+        <!-- Placeholder -->
+        <option value="" disabled selected>💳 Banka Seçiniz</option>
+
+        <% 
+        const bankaIsimleri = [
+            {isim:"AkBank", emoji:"🟦"}, 
+            {isim:"AlBaraka", emoji:"🟩"}, 
+            {isim:"Alternatif Bank", emoji:"🟧"}, 
+            {isim:"Anadolu Bank", emoji:"🟪"}, 
+            {isim:"Burgan Bank", emoji:"🟥"},
+            {isim:"DenizBank", emoji:"🌊"}, 
+            {isim:"Emlak Katılım", emoji:"🏠"}, 
+            {isim:"FibaBank", emoji:"🔵"}, 
+            {isim:"Garanti Bankası", emoji:"💚"}, 
+            {isim:"KuveytTürk", emoji:"🟢"},
+            {isim:"İş Bankası", emoji:"🟦"}, 
+            {isim:"HalkBank", emoji:"🟨"}, 
+            {isim:"İNG", emoji:"🟧"}, 
+            {isim:"OdeoBank", emoji:"🟪"}, 
+            {isim:"QNB", emoji:"🟩"}, 
+            {isim:"ŞekerBank", emoji:"🍬"},
+            {isim:"TEB", emoji:"🟦"}, 
+            {isim:"TurkiyeFinans", emoji:"🟢"}, 
+            {isim:"VakıfBank", emoji:"🟨"}, 
+            {isim:"Yapı Kredi", emoji:"🔴"}, 
+            {isim:"Ziraat Bankası", emoji:"🟩"}, 
+            {isim:"Ziraat Katılım", emoji:"🟢"},
+                        {isim:"Hayat Finans", emoji:"🟢"}
+
+        ];
+
+        bankaIsimleri.forEach(b => { 
+        %>
+            <option value="<%= b.isim %>" <%= banka?.isim === b.isim ? 'selected' : '' %>>
+                <%= b.emoji %> <%= b.isim %>
+            </option>
+        <% }) %>
+    </select>
+</div>
+
+    <div class="form-group">
+        <label>Durum</label>
+        <select name="durum">
+            <% const durumlar = ["aktif","pasif","bloke","işlemde"] %>
+            <% durumlar.forEach(d => { %>
+                <option value="<%= d %>" <%= banka?.durum === d ? 'selected' : '' %>><%= d.charAt(0).toUpperCase() + d.slice(1) %></option>
+            <% }) %>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Şube</label>
+        <input type="text" name="sube" placeholder="Bankanın Şubesi" oninput="this.value = this.value.toUpperCase()">
+    </div>
+    <div class="form-group">
+        <label>Telefon</label>
+        <input type="number" name="telefon"  placeholder="11 haneli numara" pattern="\d{11}" maxlength="11">
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Bankaya Kayıtlı Mail" oninput="this.value = this.value.toUpperCase()">
+    </div>
+
+        <div class="form-group">
+        <label>Müşteri No</label>
+        <input type="text" name="musteriNo" placeholder="Bankanın Müşteri Numarası" oninput="this.value = this.value.toUpperCase()">
+    </div>
+
+    <div class="form-group">
+        <label>Kullanıcı No</label>
+        <input type="text" name="firmaNo" placeholder="Banka Firma Numarası" oninput="this.value = this.value.toUpperCase()">
+    </div>
+
+
+    <div class="form-group">
+        <label>Şifre</label>
+        <input type="number" name="sifre" placeholder="Banka Şifresi">
+    </div>
+
+    <div class="form-group">
+        <label>Güvenlik Resmi</label>
+        <input type="text" name="guvenlikResmi" placeholder="Bankanın Güvenlik Resmi" oninput="this.value = this.value.toUpperCase()">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">
+        <i class="bi bi-save"></i> Kaydet
+    </button>
+</form>
+
+</div>
+</body>
+</html>

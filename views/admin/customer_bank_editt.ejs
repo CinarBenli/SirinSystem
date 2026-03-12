@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopYatırım - Banka Düzenleme</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<style>
+body{
+    background:#f4f6fb;
+    font-family:Inter,sans-serif;
+    margin:0;
+}
+
+.main{
+    margin:2rem;
+}
+
+.topbar{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    background:white;
+    padding:15px 20px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.06);
+    margin-bottom:25px;
+}
+
+.back-link{
+    color:black;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.back-link:hover{
+    color:#3b82f6;
+}
+
+.form-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);
+}
+
+.form-card h3{
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    font-weight:600;
+    color:#555;
+}
+
+.form-group input, .form-group select{
+    width:100%;
+    padding:8px 12px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:14px;
+}
+
+.form-group input[readonly]{
+    background:#f1f1f1;
+    cursor:not-allowed;
+}
+
+button{
+    margin-top:15px;
+}
+
+@media (max-width:768px){
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="main">
+
+<div class="topbar">
+    <div>
+        <a href="/admin/customer/<%= musteriId %>" class="back-link">
+            <i class="bi bi-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+    <div><strong>ŞİRİN BANK</strong></div>
+    <div><strong><%= banka.isim %></strong></div>
+</div>
+
+<div class="form-card">
+<h3>Banka Düzenleme</h3>
+
+<form action="<%= action %>" method="POST">
+
+    <div class="form-group">
+        <label>Banka İsmi</label>
+        <input type="text" name="isim" value="<%= banka.isim %>" readonly>
+    </div>
+
+    <div class="form-group">
+        <label>Durum</label>
+        <select name="durum">
+            <% const durumlar = ["aktif","pasif","bloke","işlemde"] %>
+            <% durumlar.forEach(d => { %>
+                <option value="<%= d %>" <%= banka.durum === d ? 'selected' : '' %>>
+                    <%= d.charAt(0).toUpperCase() + d.slice(1) %>
+                </option>
+            <% }) %>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Telefon</label>
+        <input type="text" name="telefon" value="<%= banka.telefon %>" pattern="\d{11}" maxlength="11" placeholder="11 haneli numara">
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" name="email" value="<%= banka.email || '-' %>" oninput="this.value = this.value.toUpperCase()">
+    </div>
+
+    <div class="form-group">
+        <label>Şifre</label>
+        <input type="number" name="sifre" value="<%= banka.sifre || '-' %>" >
+    </div>
+
+    <div class="form-group">
+        <label>Güvenlik Resmi</label>
+        <input type="text" name="guvenlikResmi" value="<%= banka.guvenlikResmi || '-' %>" oninput="this.value = this.value.toUpperCase()">
+    </div>
+
+    <div class="form-group">
+        <label>Şube</label>
+        <input type="text" name="sube" value="<%= banka.sube || '-' %>" oninput="this.value = this.value.toUpperCase()">
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        <i class="bi bi-save"></i> Kaydet
+    </button>
+</form><a href="/admin/customer/<%= musteriId %>/bankas/<%= banka.id %>/delete"><button class="btn btn-danger">
+        <i class="bi bi-trash3-fill"></i> Sil
+    </button></a>
+</div>
+
+</div>
+</body>
+</html>
