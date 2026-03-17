@@ -131,7 +131,10 @@ button{
         <label>Email</label>
         <input type="text" name="email" value="<%= banka.email || '-' %>" oninput="this.value = this.value.toUpperCase()">
     </div>
-
+    <div class="form-group">
+        <label>Email Şifre</label>
+        <input type="text" name="emailsifre" value="<%= banka.email || '-' %>" oninput="this.value = this.value.toUpperCase()">
+    </div>
     <div class="form-group">
         <label>Şifre</label>
         <input type="number" name="sifre" value="<%= banka.sifre || '-' %>" >
