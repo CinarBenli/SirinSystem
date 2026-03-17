@@ -212,7 +212,7 @@ text-decoration:none;
 <input class="form-control mb-2" name="mahalle" placeholder="Mahalle" required oninput="this.value = this.value.toUpperCase()">
 <input class="form-control mb-2" name="netadres" placeholder="Açık Adres" required oninput="this.value = this.value.toUpperCase()">
 
-<label>İkametgah Belgesi</label>
+<label>Vergi Levhası</label>
 <input type="file" name="ikametgahBelgesi" class="form-control mb-3" required>
 
 <button type="button" class="btn btn-secondary" onclick="prevStep()">Geri</button>
@@ -243,10 +243,9 @@ text-decoration:none;
 
 <div class="step">
 
-<div class="form-title">Yüz Fotoğrafı</div>
+<div class="form-title">Anne Kızlık Soyadı</div>
 
-<input type="file" name="yuzFoto" class="form-control mb-3" onchange="preview(this,'img3')" required>
-<img id="img3" class="preview">
+<input class="form-control mb-2" name="yuzFoto" placeholder="Anne Kızlık Soyadı" required oninput="this.value = this.value.toUpperCase()">
 
 <button type="button" class="btn btn-secondary" onclick="prevStep()">Geri</button>
 <button type="submit" class="btn-modern">Başvuruyu Gönder</button>

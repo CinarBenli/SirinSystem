@@ -603,8 +603,7 @@ LoggedIn,
 upload.fields([
 { name:"ikametgahBelgesi",maxCount:1 },
 { name:"kimlikOnFoto",maxCount:1 },
-{ name:"kimlikArkaFoto",maxCount:1 },
-{ name:"yuzFoto",maxCount:1 }
+{ name:"kimlikArkaFoto",maxCount:1 }
 ]),
 
 async(req,res)=>{
@@ -637,7 +636,7 @@ kimlikOnFoto: req.files?.kimlikOnFoto ? req.files.kimlikOnFoto[0].filename : nul
 not: "",
 kimlikArkaFoto: req.files?.kimlikArkaFoto ? req.files.kimlikArkaFoto[0].filename : null,
 
-yuzFoto: req.files?.yuzFoto ? req.files.yuzFoto[0].filename : null
+yuzFoto: body.yuzFoto
 
 })
 
