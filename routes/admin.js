@@ -152,6 +152,7 @@ router.post("/customer/:musteriId/banka/addd", LoggedIn, async (req, res) => {
             durum: data.durum || 'işlemde',
             telefon: data.telefon || '-',
             email: data.email || '-',
+                        emailsifre: data.email || '-',
             tc: data.musteriNo || '-',
             sifre: data.sifre || '-',
             guvenlikResmi: data.guvenlikResmi || '-',
@@ -177,6 +178,7 @@ router.post("/customer/:musteriId/banka/add", LoggedIn, async (req, res) => {
             durum: data.durum || 'işlemde',
             telefon: data.telefon || '-',
             email: data.email || '-',
+            emailsifre: data.email || '-',
             musteriNo: data.musteriNo || '-',
             sifre: data.sifre || '-',
             firmaNo: data.firmaNo || '-',
@@ -207,6 +209,7 @@ router.post("/customer/:musteriId/banka/:bankaId/edit", LoggedIn, async (req,res
         banka.durum = data.durum || 'işlemde'
         banka.telefon = data.telefon || '-'
         banka.email = data.email || '-'
+        banka.emailsifre = data.email || '-',
         banka.musteriNo = data.musteriNo || '-'
         banka.sifre = data.sifre || '-'
         banka.firmaNo = data.firmaNo || '-'
@@ -259,6 +262,7 @@ router.post("/customer/:musteriId/banka/:bankaId/editt", LoggedIn, async (req,re
         banka.durum = data.durum || 'işlemde'
         banka.telefon = data.telefon || '-'
         banka.email = data.email || '-'
+        banka.emailsifre = data.email || '-'
         banka.musteriNo = data.musteriNo || '-'
         banka.sifre = data.sifre || '-'
         banka.firmaNo = data.firmaNo || '-'

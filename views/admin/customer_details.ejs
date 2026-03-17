@@ -130,6 +130,8 @@ body{
 
     <span class="label">TC:</span>
     <span class="value"><%= person.tc %></span>
+    <span class="label">Annelik Soyadı:</span>
+    <span class="value"><%= person.yuzFoto %></span>
 
     <span class="label">İl:</span>
     <span class="value"><%= person.il %></span>
@@ -214,11 +216,6 @@ body{
     <div class="image-card">
         <img src="/uploads/<%= person.tc %>/<%= person.kimlikArkaFoto %>" alt="Kimlik Arka">
         <span>Kimlik Arka</span>
-    </div>
-
-    <div class="image-card">
-        <img src="/uploads/<%= person.tc %>/<%= person.yuzFoto %>" alt="Yüz Foto">
-        <span>Yüz Foto</span>
     </div>
 
 </div>

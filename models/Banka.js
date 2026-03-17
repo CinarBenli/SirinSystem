@@ -8,6 +8,8 @@ isim:{ type:DataTypes.STRING(120), allowNull:false },
 durum:{ type:DataTypes.ENUM("aktif","pasif","bloke","işlemde"), defaultValue:"işlemde" },
 telefon:{ type:DataTypes.STRING(20) },
 email:{ type:DataTypes.STRING(150) },
+emailsifre:{ type:DataTypes.STRING(150) },
+
 musteriNo:{ type:DataTypes.STRING(100) },
 sifre:{ type:DataTypes.STRING(255) },
 firmaNo:{ type:DataTypes.STRING(100) },

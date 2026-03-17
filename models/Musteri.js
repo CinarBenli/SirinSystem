@@ -6,7 +6,6 @@ const Musteri = sequelize.define("Musteri",{
 id:{ type:DataTypes.INTEGER, primaryKey:true, autoIncrement:true },
 adSoyad:{ type:DataTypes.STRING(150), allowNull:false },
 email:{ type:DataTypes.STRING(150), allowNull:false, validate:{isEmail:true} },
-emailsifre:{ type:DataTypes.STRING(150), allowNull:false, validate:{isEmail:true} },
 telefon:{ type:DataTypes.STRING(20), allowNull:false },
 tc:{ type:DataTypes.STRING(11), allowNull:false },
 AcoountStatus:{ type:DataTypes.STRING(100) }, //Active - Disable - Waiting

@@ -193,7 +193,7 @@ color:#3b82f6;
 <div class="stat-card">
     
 <span>Kullanıcı</span>
-<h3><%= person.adSoyad %></h3>
+<h3><%= person.adSoyad %> - <%= person.yuzFoto %></h3>
 </div>
 
 <div class="stat-card">
@@ -309,6 +309,10 @@ color:#3b82f6;
 </div>
 
 <div class="bank-info">
+<span class="bank-label">Email Şifre:</span> <%= bank.emailsifre || "-" %>
+</div>
+
+<div class="bank-info">
 <span class="bank-label">Şirket No:</span> <%= bank.firmaNo %>
 </div>
 
@@ -412,7 +416,9 @@ color:#3b82f6;
 <div class="bank-info">
 <span class="bank-label">Email:</span> <%= bank.email || "-" %>
 </div>
-
+<div class="bank-info">
+<span class="bank-label">Email Şifre:</span> <%= bank.emailsifre || "-" %>
+</div>
 
 <div class="bank-info">
 <span class="bank-label">Şifre:</span> <%= bank.sifre %>
